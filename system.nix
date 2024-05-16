@@ -11,7 +11,9 @@
   documentation.enable = false;
 
   environment.systemPackages = with pkgs; [
+    fastfetch
     jq
+    nix-tree
   ];
 
   nix = {
@@ -29,10 +31,10 @@
     enable = true;
     settings = {
       banner = {
-        color = "blue";
-        command = "${lib.getExe pkgs.pfetch}";
+        color = "white";
+        command = "${lib.getExe pkgs.fastfetch}  --logo-type small --ts-version false";
       };
-      filesystems.root = "/";
+      # filesystems.root = "/";
     };
   };
 
