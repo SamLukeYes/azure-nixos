@@ -13,6 +13,8 @@ in
     allowedUDPPorts = [ port ];
   };
 
+  programs.rust-motd.settings.service_status.ssserver = "ssserver";
+
   systemd = {
     services.ssserver = {
       after = [ "network.target" ];

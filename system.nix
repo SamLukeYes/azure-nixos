@@ -1,4 +1,4 @@
-{ modulesPath, pkgs, ... }:
+{ lib, modulesPath, pkgs, ... }:
 
 {
   imports = [
@@ -12,7 +12,6 @@
 
   environment.systemPackages = with pkgs; [
     jq
-    neofetch
   ];
 
   nix = {
@@ -26,6 +25,17 @@
     };
   };
 
+  programs.rust-motd = {
+    enable = true;
+    settings = {
+      banner = {
+        color = "blue";
+        command = "${lib.getExe pkgs.pfetch}";
+      };
+      filesystems.root = "/";
+    };
+  };
+
   # virtualisation.azureImage.diskSize = 2500;
 
   system.stateVersion = "24.05";
@@ -33,4 +43,6 @@
 
   services.openssh.settings.PasswordAuthentication = false;
   # security.sudo.wheelNeedsPassword = false;
+
+  zramSwap.enable = true;
 }

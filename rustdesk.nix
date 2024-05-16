@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
+  programs.rust-motd.settings.service_status = {
+    hbbr = "rustdesk-relay";
+    hbbs = "rustdesk-signal";
+  };
+
   services.rustdesk-server = {
     enable = true;
     openFirewall = true;
