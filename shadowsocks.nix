@@ -3,8 +3,8 @@
 let
   username = "shadowsocks";
   home = "/var/lib/${username}";
+  configFile = "${home}/config.json";
   port = 1024;
-  cipher = "2022-blake3-aes-256-gcm";
 in
 
 {
@@ -17,20 +17,23 @@ in
     services.ssserver = {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.shadowsocks-rust ];
+      path = with pkgs; [
+        jq
+        shadowsocks-rust
+      ];
       script = ''
-        PASSWORD=`cat ${home}/password`
-        exec ssserver -s [::]:${builtins.toString port} \
-          -m ${cipher} -k $PASSWORD
-      '';   # TODO: Don't pass password to command line
+        jq '.server_port = ${builtins.toString port}' ${configFile} > /tmp/config.json
+        exec ssserver -c /tmp/config.json
+      '';
       serviceConfig = {
         # https://github.com/shadowsocks/shadowsocks-rust/blob/master/debian/shadowsocks-rust-server%40.service
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
+        PrivateTmp = true;
         User = username;
         Group = username;
       };
-      unitConfig.ConditionFileNotEmpty = "${home}/password";
+      unitConfig.ConditionFileNotEmpty = configFile;
     };
 
     tmpfiles.rules = [
