@@ -8,6 +8,8 @@
     ./shadowsocks.nix
   ];
 
+  documentation.enable = false;
+
   environment.systemPackages = with pkgs; [
     jq
     neofetch
