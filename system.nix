@@ -1,9 +1,10 @@
-{ lib, modulesPath, pkgs, ... }:
+{ modulesPath, pkgs, ... }:
 
 {
   imports = [
     "${modulesPath}/virtualisation/azure-common.nix"
     "${modulesPath}/virtualisation/azure-image.nix"
+    ./motd.nix
     ./rustdesk.nix
     ./shadowsocks.nix
   ];
@@ -27,17 +28,6 @@
     };
   };
 
-  programs.rust-motd = {
-    enable = true;
-    settings = {
-      banner = {
-        color = "white";
-        command = "${lib.getExe pkgs.fastfetch}  --logo-type small --ts-version false";
-      };
-      # filesystems.root = "/";
-    };
-  };
-
   # virtualisation.azureImage.diskSize = 2500;
 
   system.stateVersion = "24.05";
@@ -45,6 +35,8 @@
 
   services.openssh.settings.PasswordAuthentication = false;
   # security.sudo.wheelNeedsPassword = false;
+
+  time.timeZone = "Asia/Hong_Kong";
 
   zramSwap.enable = true;
 }
