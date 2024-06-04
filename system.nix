@@ -19,6 +19,7 @@
   ];
 
   nix = {
+    package = pkgs.lix;
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
