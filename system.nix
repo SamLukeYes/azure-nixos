@@ -7,6 +7,7 @@
     ./motd.nix
     ./rustdesk.nix
     ./shadowsocks.nix
+    ./sws.nix
   ];
 
   documentation.enable = false;
@@ -29,6 +30,8 @@
   };
 
   # virtualisation.azureImage.diskSize = 2500;
+
+  programs.git.enable = true;
 
   system.stateVersion = "24.05";
   # boot.kernelPackages = pkgs.linuxPackages_latest;
