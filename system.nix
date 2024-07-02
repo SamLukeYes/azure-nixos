@@ -4,6 +4,7 @@
   imports = [
     "${modulesPath}/virtualisation/azure-common.nix"
     "${modulesPath}/virtualisation/azure-image.nix"
+    ./fail2ban.nix
     ./motd.nix
     ./rustdesk.nix
     ./shadowsocks.nix

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.rust-motd = {
@@ -11,15 +11,5 @@
       # filesystems.root = "/";
       last_login.azureuser = 10;
     };
-  };
-
-  systemd = {
-    services.rust-motd.serviceConfig = {
-      User = "azureuser";
-      # Group = "azureuser";
-    };
-    tmpfiles.rules = [
-      "d ${config.systemd.services.rust-motd.serviceConfig.WorkingDirectory} 644 azureuser azureuser - -"
-    ];
   };
 }
