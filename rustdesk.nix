@@ -24,6 +24,7 @@
         exec hbbs -r $public_ip
       ''}";
       Restart = "on-failure";
+      RestartSec = 5;
     };
   };
 }
