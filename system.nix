@@ -33,7 +33,10 @@
 
   # virtualisation.azureImage.diskSize = 2500;
 
-  programs.git.enable = true;
+  programs = {
+    git.enable = true;
+    xonsh.enable = true;
+  };
 
   system.stateVersion = "24.05";
   # boot.kernelPackages = pkgs.linuxPackages_latest;
