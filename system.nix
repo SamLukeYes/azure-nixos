@@ -45,6 +45,4 @@
   # security.sudo.wheelNeedsPassword = false;
 
   time.timeZone = "Asia/Hong_Kong";
-
-  zramSwap.enable = true;
 }
