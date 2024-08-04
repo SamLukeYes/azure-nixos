@@ -5,17 +5,18 @@
     "${modulesPath}/virtualisation/azure-common.nix"
     "${modulesPath}/virtualisation/azure-image.nix"
     ./fail2ban.nix
-    ./k3s.nix
+    # ./k3s.nix
     ./motd.nix
-    ./rustdesk.nix
+    # ./rustdesk.nix
     ./shadowsocks.nix
-    ./sws.nix
+    # ./sws.nix
   ];
 
   documentation.enable = false;
 
   environment.systemPackages = with pkgs; [
     fastfetch
+    htop
     jq
     nix-tree
   ];
@@ -39,7 +40,14 @@
   };
 
   system.stateVersion = "24.05";
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # https://github.com/NixOS/nixpkgs/issues/84105
+  # start tty0 on serial console
+  systemd.services."serial-getty@ttyS0" = {
+    enable = true;
+    wantedBy = [ "getty.target" ]; # to start at boot
+    serviceConfig.Restart = "always"; # restart when session is closed
+  };
 
   services.openssh.settings.PasswordAuthentication = false;
   # security.sudo.wheelNeedsPassword = false;
