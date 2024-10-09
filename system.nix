@@ -5,11 +5,8 @@
     "${modulesPath}/virtualisation/azure-common.nix"
     "${modulesPath}/virtualisation/azure-image.nix"
     ./fail2ban.nix
-    # ./k3s.nix
     ./motd.nix
-    # ./rustdesk.nix
     ./shadowsocks.nix
-    # ./sws.nix
   ];
 
   documentation.enable = false;
