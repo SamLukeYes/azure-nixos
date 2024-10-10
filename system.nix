@@ -5,7 +5,6 @@
     "${modulesPath}/virtualisation/azure-common.nix"
     "${modulesPath}/virtualisation/azure-image.nix"
     ./fail2ban.nix
-    ./frp.nix
     ./motd.nix
     ./shadowsocks.nix
   ];
