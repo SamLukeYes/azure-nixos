@@ -36,6 +36,12 @@
     xonsh.enable = true;
   };
 
+  # https://gist.github.com/ssrlive/32d4f2796746cd5e751985be19adf7a1
+  services.openssh.settings = {
+    AllowTcpForwarding = "yes";
+    GatewayPorts = "yes";
+  };
+
   system.stateVersion = "24.05";
   
   # https://github.com/NixOS/nixpkgs/issues/84105
