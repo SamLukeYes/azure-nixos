@@ -9,6 +9,8 @@
     ./shadowsocks.nix
   ];
 
+  boot.kernelParams = ["zswap.enabled=1"];
+
   documentation.enable = false;
 
   environment.systemPackages = with pkgs; [
@@ -41,6 +43,11 @@
     AllowTcpForwarding = "yes";
     GatewayPorts = "yes";
   };
+
+  swapDevices = [{
+    device = "/var/swapfile";
+    size = 2048;
+  }];
 
   system.stateVersion = "24.05";
   
